@@ -24,7 +24,7 @@ namespace Infraestructure.Persistence
             _logger.LogInformation("Iniciando proceso de extraccion de libros de la DB");
             try
             {
-                return await _context.ViewLibros.ToListAsync();
+                return await _context.viewlibros.ToListAsync();
             }
             catch (Exception e)
             {

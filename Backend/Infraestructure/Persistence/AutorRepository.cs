@@ -24,7 +24,7 @@ namespace Infraestructure.Persistence
             _logger.LogInformation("Iniciando proceso de extraccion de autores de la DB");
             try
             {
-                var autores =  await _context.ViewAutores.ToListAsync();
+                var autores =  await _context.viewautores.ToListAsync();
                 if(autores == null || autores.Count < 0)
                 {
                     _logger.LogError("La lista de autores está viniendo vacia de la DB");
