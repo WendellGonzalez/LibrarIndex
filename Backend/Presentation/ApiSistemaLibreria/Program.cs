@@ -13,8 +13,6 @@ class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        // Add services to the container.
-
         builder.Services.AddCors(options =>
         {
             options.AddPolicy("AllowAll", policy =>
@@ -25,7 +23,7 @@ class Program
             });
         });
 
-        //Aqui realizo las inyecciones de dependencias
+        // Inyecciones de dependencias
         builder.Services.AddScoped<IContactService, ContactService>();
         builder.Services.AddScoped<IContactRepository, ContactRepository>();
         builder.Services.AddScoped<IAutorRepository, AutorRepository>();
@@ -33,18 +31,41 @@ class Program
         builder.Services.AddScoped<IExtractorService<LibroDTO>, LibroService>();
         builder.Services.AddScoped<IExtractorService<AutorDTO>, AutorService>();
 
-        builder.Services.AddDbContext<ContactDbContext>(options =>
-            options.UseNpgsql(builder.Configuration.GetConnectionString("DbConnection")));
+        // Configuración dinámica de PostgreSQL desde variable de entorno DATABASE_URL
+        var databaseUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
 
+        if (!string.IsNullOrEmpty(databaseUrl))
+        {
+            var databaseUri = new Uri(databaseUrl);
+            var userInfo = databaseUri.UserInfo.Split(':');
+
+            var npgsqlBuilder = new Npgsql.NpgsqlConnectionStringBuilder()
+            {
+                Host = databaseUri.Host,
+                Port = databaseUri.Port,
+                Username = userInfo[0],
+                Password = userInfo[1],
+                Database = databaseUri.AbsolutePath.TrimStart('/'),
+                SslMode = Npgsql.SslMode.Require,
+                TrustServerCertificate = true
+            };
+
+            builder.Services.AddDbContext<ContactDbContext>(options =>
+                options.UseNpgsql(npgsqlBuilder.ConnectionString));
+        }
+        else
+        {
+            // Fallback a appsettings.json
+            builder.Services.AddDbContext<ContactDbContext>(options =>
+                options.UseNpgsql(builder.Configuration.GetConnectionString("DbConnection")));
+        }
 
         builder.Services.AddControllers();
-        // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
         builder.Services.AddOpenApi();
         builder.Services.AddSwaggerGen();
 
         var app = builder.Build();
 
-        // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
         {
             app.MapOpenApi();
@@ -52,14 +73,12 @@ class Program
             app.UseSwaggerUI();
         }
 
-        app.UseHttpsRedirection();
+        // En contenedor Render no hace falta HTTPS
+        // app.UseHttpsRedirection();
 
         app.UseAuthorization();
-
         app.UseCors("AllowAll");
-
         app.MapControllers();
-
         app.Run();
     }
 }
