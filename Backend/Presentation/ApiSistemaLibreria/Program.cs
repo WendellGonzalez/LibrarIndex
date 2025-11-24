@@ -5,6 +5,7 @@ using Application.Services;
 using Domain.Entities;
 using Infraestructure.Context;
 using Infraestructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 class Program
 {
@@ -32,7 +33,9 @@ class Program
         builder.Services.AddScoped<IExtractorService<LibroDTO>, LibroService>();
         builder.Services.AddScoped<IExtractorService<AutorDTO>, AutorService>();
 
-        builder.Services.AddSqlServer<ContactDbContext>(builder.Configuration.GetConnectionString("DbConnection"));
+        builder.Services.AddDbContext<ContactDbContext>(options =>
+            options.UseNpgsql(builder.Configuration.GetConnectionString("DbConnection")));
+
 
         builder.Services.AddControllers();
         // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
