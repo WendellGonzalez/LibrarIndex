@@ -1,25 +1,34 @@
-# Imagen base para compilar
+# -----------------------------
+# Etapa 1: Build
+# -----------------------------
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /app
 
-# Copiar archivos del proyecto
-COPY ./Backend/Presentation/ApiSistemaLibreria/ApiSistemaLibreria.csproj ./
-RUN dotnet restore
+# Copiar todos los proyectos para restaurar correctamente
+COPY ./Backend/Core/Core.Domain/Core.Domain.csproj ./Core/Domain/
+COPY ./Backend/Core/Core.Application/Core.Application.csproj ./Core/Application/
+COPY ./Backend/Infraestructure/Infraestructure.csproj ./Infraestructure/
+COPY ./Backend/Presentation/ApiSistemaLibreria/ApiSistemaLibreria.csproj ./Presentation/ApiSistemaLibreria/
 
-# Copiar el resto del código
-COPY . ./
+# Restaurar dependencias
+RUN dotnet restore ./Presentation/ApiSistemaLibreria/ApiSistemaLibreria.csproj
 
-# Publicar la aplicación en modo release
-RUN dotnet publish ApiSistemaLibreria.csproj -c Release -o out
+# Copiar todo el código
+COPY ./Backend ./ 
 
-# Imagen base para ejecutar
+# Publicar en modo Release
+RUN dotnet publish ./Presentation/ApiSistemaLibreria/ApiSistemaLibreria.csproj -c Release -o out
+
+# -----------------------------
+# Etapa 2: Runtime
+# -----------------------------
 FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS runtime
 WORKDIR /app
 
-# Copiar publicación desde la build
+# Copiar los archivos publicados desde la build
 COPY --from=build /app/out ./
 
-# Exponer el puerto donde corre tu API
+# Exponer el puerto de la API
 EXPOSE 8080
 
 # Comando de inicio
