@@ -89,3 +89,4 @@
 /Users/wendellgonzalez/Projects/ProgramacionWeb/PROYECTO_FINAL/SistemaLibreria/Backend/Presentation/ApiSistemaLibreria/obj/Debug/net9.0/ApiSistemaLibreria.pdb
 /Users/wendellgonzalez/Projects/ProgramacionWeb/PROYECTO_FINAL/SistemaLibreria/Backend/Presentation/ApiSistemaLibreria/obj/Debug/net9.0/ApiSistemaLibreria.genruntimeconfig.cache
 /Users/wendellgonzalez/Projects/ProgramacionWeb/PROYECTO_FINAL/SistemaLibreria/Backend/Presentation/ApiSistemaLibreria/obj/Debug/net9.0/ref/ApiSistemaLibreria.dll
+/Users/wendellgonzalez/Projects/ProgramacionWeb/PROYECTO_FINAL/SistemaLibreria/Backend/Presentation/ApiSistemaLibreria/obj/Debug/net9.0/ApiSistemaLibreria.sourcelink.json
