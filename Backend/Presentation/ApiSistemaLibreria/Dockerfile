@@ -10,7 +10,7 @@ RUN dotnet restore
 COPY . ./
 
 # Publicar la aplicación en modo release
-RUN dotnet publish -c Release -o out
+RUN dotnet publish ApiSistemaLibreria.csproj -c Release -o out
 
 # Imagen base para ejecutar
 FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS runtime
