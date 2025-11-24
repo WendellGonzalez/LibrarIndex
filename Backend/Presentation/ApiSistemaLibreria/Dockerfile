@@ -5,8 +5,8 @@ FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /app
 
 # Copiar solo los .csproj de todos los proyectos para restaurar dependencias
-COPY ./Backend/Core/Core.Domain/Core.Domain.csproj ./Core/Domain/
-COPY ./Backend/Core/Core.Application/Core.Application.csproj ./Core/Application/
+COPY ./Backend/Core/Domain/Domain.csproj ./Core/Domain/
+COPY ./Backend/Core/Application/Application.csproj ./Core/Application/
 COPY ./Backend/Infraestructure/Infraestructure.csproj ./Infraestructure/
 COPY ./Backend/Presentation/ApiSistemaLibreria/ApiSistemaLibreria.csproj ./Presentation/ApiSistemaLibreria/
 
