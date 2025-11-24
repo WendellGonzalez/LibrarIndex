@@ -4,7 +4,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /app
 
-# Copiar todos los proyectos para restaurar correctamente
+# Copiar solo los .csproj de todos los proyectos para restaurar dependencias
 COPY ./Backend/Core/Core.Domain/Core.Domain.csproj ./Core/Domain/
 COPY ./Backend/Core/Core.Application/Core.Application.csproj ./Core/Application/
 COPY ./Backend/Infraestructure/Infraestructure.csproj ./Infraestructure/
@@ -15,6 +15,10 @@ RUN dotnet restore ./Presentation/ApiSistemaLibreria/ApiSistemaLibreria.csproj
 
 # Copiar todo el código
 COPY ./Backend ./ 
+
+# Limpiar obj/bin para evitar duplicados de AssemblyInfo
+RUN find . -type d -name obj -exec rm -rf {} + \
+    && find . -type d -name bin -exec rm -rf {} +
 
 # Publicar en modo Release
 RUN dotnet publish ./Presentation/ApiSistemaLibreria/ApiSistemaLibreria.csproj -c Release -o out
