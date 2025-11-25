@@ -12,7 +12,7 @@ namespace Domain.Entities
         public string id_titulo { get; set; } = string.Empty;
         public string titulo { get; set; } = string.Empty;
         public string tipo { get; set; } = string.Empty;
-        public decimal precio { get; set; }
+        public double precio { get; set; }
         public string notas { get; set; } = string.Empty;
         public DateOnly fecha_pub { get; set; }
     }
