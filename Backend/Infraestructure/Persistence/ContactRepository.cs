@@ -26,7 +26,7 @@ namespace Infraestructure.Persistence
             _logger.LogInformation("Iniciando proceso de Registro de informacion de contacto: {Correo}", contact.Correo);
             try
             {
-                await _context.Contacto.AddAsync(contact);
+                await _context.contacto.AddAsync(contact);
                 await _context.SaveChangesAsync();
             }
             catch (Exception e)
