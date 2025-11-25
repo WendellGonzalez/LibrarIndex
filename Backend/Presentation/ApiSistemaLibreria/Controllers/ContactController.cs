@@ -29,29 +29,17 @@ namespace ApiSistemaLibreria.Controllers
             _logger.LogInformation($"Iniciando proceso de POST: Contacto {model.Nombre}");
             try
             {
-                if (string.IsNullOrWhiteSpace(model.Nombre) || string.IsNullOrWhiteSpace(model.Correo) || string.IsNullOrWhiteSpace(model.Asunto) || string.IsNullOrWhiteSpace(model.Comentario))
+                if (string.IsNullOrWhiteSpace(model.Nombre) || string.IsNullOrWhiteSpace(model.Correo)
+                    || string.IsNullOrWhiteSpace(model.Asunto) || string.IsNullOrWhiteSpace(model.Comentario))
                 {
                     return BadRequest(new AuthResponse
                     {
                         success = false,
-                        Message = "El usuario enviado está null"
+                        Message = "Todos los campos son obligatorios"
                     });
                 }
 
-                var proceso = _service.ProcessContactInfo(model);
-
-                if (proceso == null)
-                {
-                    return BadRequest(new AuthResponse
-                    {
-                        success = false,
-                        Message = "Error en el procesamiento de la informacion"
-                    });
-                }
-                else
-                {
-                    await proceso;
-                }
+                await _service.ProcessContactInfo(model);
 
                 return new AuthResponse
                 {
@@ -70,5 +58,6 @@ namespace ApiSistemaLibreria.Controllers
                 });
             }
         }
+
     }
 }
