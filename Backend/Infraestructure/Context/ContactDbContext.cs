@@ -15,5 +15,10 @@ namespace Infraestructure.Context
         public DbSet<Contact> Contacto { get; set; }
         public DbSet<Libro> viewlibros { get; set; }
         public DbSet<Autor> viewautores { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Contact>().ToTable("Contacto"); 
+        }
     }
 }
