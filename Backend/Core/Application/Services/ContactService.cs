@@ -35,7 +35,7 @@ namespace Application.Services
                 {
                     Nombre = contact.Nombre,
                     Correo = contact.Correo,
-                    Fecha = DateTime.Now,
+                    Fecha = DateTime.UtcNow,
                     Asunto = contact.Asunto,
                     Comentario = contact.comentario
                 };
