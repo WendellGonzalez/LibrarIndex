@@ -38,17 +38,17 @@ namespace ApiSistemaLibreria.Controllers
                     });
                 }
 
-
                 var proceso = _service.ProcessContactInfo(model);
 
                 if (proceso == null)
                 {
-                    return new AuthResponse
+                    return BadRequest(new AuthResponse
                     {
                         success = false,
                         Message = "Error en el procesamiento de la informacion"
-                    };
-                } else
+                    });
+                }
+                else
                 {
                     await proceso;
                 }
