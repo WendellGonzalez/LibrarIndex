@@ -12,7 +12,7 @@ namespace Domain.Entities
         public int Id { get; set; }
         public string Nombre { get; set; } = string.Empty;
         public string Correo { get; set; } = string.Empty;
-        public DateTime Fecha { get; set; }
+        public DateTime Fecha { get; set; } = DateTime.UtcNow;
         public string Asunto { get; set; } = string.Empty;
         public string Comentario { get; set; } = string.Empty;
     }
