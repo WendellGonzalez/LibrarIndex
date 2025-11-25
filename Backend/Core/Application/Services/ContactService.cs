@@ -25,9 +25,9 @@ namespace Application.Services
             _logger.LogInformation("Iniciando limpieza y validacion de informacion de contacto: {Correo}", contact.Correo);
             try
             {
-                if (contact.Comentario.Length > 256)
+                if (contact.comentario.Length > 256)
                 {
-                    _logger.LogError($"Cantidad de letras excedida. Maximo Permitido: 256 Caracteres. Cantidad de letras Ingresada: {contact.Comentario.Length}");
+                    _logger.LogError($"Cantidad de letras excedida. Maximo Permitido: 256 Caracteres. Cantidad de letras Ingresada: {contact.comentario.Length}");
                     return;
                 }
 
@@ -37,7 +37,7 @@ namespace Application.Services
                     Correo = contact.Correo,
                     Fecha = DateTime.Now,
                     Asunto = contact.Asunto,
-                    Comentario = contact.Comentario
+                    Comentario = contact.comentario
                 };
 
                 if (Contact == null)

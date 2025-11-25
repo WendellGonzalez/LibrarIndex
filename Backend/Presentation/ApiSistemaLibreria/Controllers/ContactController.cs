@@ -30,7 +30,7 @@ namespace ApiSistemaLibreria.Controllers
             try
             {
                 if (string.IsNullOrWhiteSpace(model.Nombre) || string.IsNullOrWhiteSpace(model.Correo)
-                    || string.IsNullOrWhiteSpace(model.Asunto) || string.IsNullOrWhiteSpace(model.Comentario))
+                    || string.IsNullOrWhiteSpace(model.Asunto) || string.IsNullOrWhiteSpace(model.comentario))
                 {
                     return BadRequest(new AuthResponse
                     {

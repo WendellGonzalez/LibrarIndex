@@ -10,6 +10,6 @@ namespace Application.DTOs
         public string Nombre { get; set; } = string.Empty;
         public string Correo { get; set; } = string.Empty;
         public string Asunto { get; set; } = string.Empty;
-        public string Comentario { get; set; } = string.Empty;
+        public string comentario { get; set; } = string.Empty;
     }
 }
