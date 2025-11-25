@@ -12,7 +12,7 @@ namespace Infraestructure.Context
     {
         public ContactDbContext(DbContextOptions<ContactDbContext> options) : base(options) { }
 
-        public DbSet<Contact> contacto { get; set; }
+        public DbSet<Contact> Contacto { get; set; }
         public DbSet<Libro> viewlibros { get; set; }
         public DbSet<Autor> viewautores { get; set; }
     }
