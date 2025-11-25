@@ -9,7 +9,6 @@ namespace Application.DTOs
     {
         public string Nombre { get; set; } = string.Empty;
         public string Correo { get; set; } = string.Empty;
-        public DateTime fecha {get;set;}
         public string Asunto { get; set; } = string.Empty;
         public string Comentario { get; set; } = string.Empty;
     }
