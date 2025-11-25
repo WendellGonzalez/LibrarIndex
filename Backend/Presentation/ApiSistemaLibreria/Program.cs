@@ -73,11 +73,37 @@ class Program
             app.UseSwaggerUI();
         }
 
-        // En contenedor Render no hace falta HTTPS
-        // app.UseHttpsRedirection();
+        // Middleware global para capturar errores y mostrar detalles
+        if (app.Environment.IsDevelopment())
+        {
+            app.UseDeveloperExceptionPage(); // Muestra errores completos en el navegador
+        }
+        else
+        {
+            app.UseExceptionHandler(errApp =>
+            {
+                errApp.Run(async context =>
+                {
+                    context.Response.ContentType = "application/json";
+                    var feature = context.Features.Get<Microsoft.AspNetCore.Diagnostics.IExceptionHandlerFeature>();
+                    if (feature != null)
+                    {
+                        var ex = feature.Error;
+                        await context.Response.WriteAsJsonAsync(new
+                        {
+                            message = ex.Message,
+                            stackTrace = ex.StackTrace
+                        });
+                    }
+                });
+            });
+        }
 
+
+        app.UseHttpsRedirection();  // Opcional si tu hosting maneja HTTP
+        app.UseCors("AllowAll");     // Siempre antes de cualquier autorización
         app.UseAuthorization();
-        app.UseCors("AllowAll");
+
         app.MapControllers();
         app.Run();
     }
