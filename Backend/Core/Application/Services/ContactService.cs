@@ -33,7 +33,6 @@ namespace Application.Services
 
                 var Contact = new Contact
                 {
-                    Id = 0,
                     Nombre = contact.Nombre,
                     Correo = contact.Correo,
                     Fecha = DateTime.Now,
