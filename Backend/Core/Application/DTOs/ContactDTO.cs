@@ -7,9 +7,9 @@ namespace Application.DTOs
 {
     public class ContactDTO
     {
-        public string Nombre { get; set; } = string.Empty;
-        public string Correo { get; set; } = string.Empty;
-        public string Asunto { get; set; } = string.Empty;
+        public string nombre { get; set; } = string.Empty;
+        public string correo { get; set; } = string.Empty;
+        public string asunto { get; set; } = string.Empty;
         public string comentario { get; set; } = string.Empty;
     }
 }

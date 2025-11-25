@@ -22,7 +22,7 @@ namespace Application.Services
         }
         public async Task ProcessContactInfo(ContactDTO contact)
         {
-            _logger.LogInformation("Iniciando limpieza y validacion de informacion de contacto: {Correo}", contact.Correo);
+            _logger.LogInformation("Iniciando limpieza y validacion de informacion de contacto: {Correo}", contact.correo);
             try
             {
                 if (contact.comentario.Length > 256)
@@ -33,16 +33,16 @@ namespace Application.Services
 
                 var Contact = new Contact
                 {
-                    Nombre = contact.Nombre,
-                    Correo = contact.Correo,
+                    Nombre = contact.nombre,
+                    Correo = contact.correo,
                     Fecha = DateTime.UtcNow,
-                    Asunto = contact.Asunto,
+                    Asunto = contact.asunto,
                     Comentario = contact.comentario
                 };
 
                 if (Contact == null)
                 {
-                    _logger.LogError("El contacto está siendo null: {Correo}", contact.Correo);
+                    _logger.LogError("El contacto está siendo null: {Correo}", contact.correo);
                     return;
                 }
 
@@ -50,7 +50,7 @@ namespace Application.Services
             }
             catch (Exception e)
             {
-                _logger.LogError(e, "Error al procesar informacion de contaacto: {Correo}", contact.Correo);
+                _logger.LogError(e, "Error al procesar informacion de contaacto: {Correo}", contact.correo);
                 throw;
             }
         }

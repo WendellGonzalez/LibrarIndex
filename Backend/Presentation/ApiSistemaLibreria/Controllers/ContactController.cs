@@ -26,11 +26,11 @@ namespace ApiSistemaLibreria.Controllers
         [HttpPost("Post-Contact")]
         public async Task<ActionResult<AuthResponse>> PostContact(ContactDTO model)
         {
-            _logger.LogInformation($"Iniciando proceso de POST: Contacto {model.Nombre}");
+            _logger.LogInformation($"Iniciando proceso de POST: Contacto {model.nombre}");
             try
             {
-                if (string.IsNullOrWhiteSpace(model.Nombre) || string.IsNullOrWhiteSpace(model.Correo)
-                    || string.IsNullOrWhiteSpace(model.Asunto) || string.IsNullOrWhiteSpace(model.comentario))
+                if (string.IsNullOrWhiteSpace(model.nombre) || string.IsNullOrWhiteSpace(model.correo)
+                    || string.IsNullOrWhiteSpace(model.asunto) || string.IsNullOrWhiteSpace(model.comentario))
                 {
                     return BadRequest(new AuthResponse
                     {
@@ -50,7 +50,7 @@ namespace ApiSistemaLibreria.Controllers
             }
             catch (Exception e)
             {
-                _logger.LogError(e, "Error al realizar Post: {Correo}", model.Correo);
+                _logger.LogError(e, "Error al realizar Post: {Correo}", model.correo);
                 return StatusCode(500, new AuthResponse
                 {
                     success = false,
