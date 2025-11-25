@@ -60,6 +60,8 @@ class Program
                 options.UseNpgsql(builder.Configuration.GetConnectionString("DbConnection")));
         }
 
+        // builder.Services.AddDbContext<ContactDbContext>(opts => opts.UseSqlServer(builder.Configuration.GetConnectionString("DbConnection")));
+
         builder.Services.AddControllers();
         builder.Services.AddOpenApi();
         builder.Services.AddSwaggerGen();
@@ -99,9 +101,8 @@ class Program
             });
         }
 
-
-        app.UseHttpsRedirection();  // Opcional si tu hosting maneja HTTP
-        app.UseCors("AllowAll");     // Siempre antes de cualquier autorización
+        app.UseHttpsRedirection();
+        app.UseCors("AllowAll");
         app.UseAuthorization();
 
         app.MapControllers();
