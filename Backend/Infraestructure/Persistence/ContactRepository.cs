@@ -23,7 +23,7 @@ namespace Infraestructure.Persistence
         }
         public async Task SaveContact(Contact contact)
         {
-            _logger.LogInformation("Iniciando proceso de Registro de informacion de contacto: {Correo}", contact.Correo);
+            _logger.LogInformation("Iniciando proceso de Registro de informacion de contacto: {Correo}", contact.correo);
             try
             {
                 await _context.contacto.AddAsync(contact);
@@ -31,7 +31,7 @@ namespace Infraestructure.Persistence
             }
             catch (Exception e)
             {
-                _logger.LogError(e, "Error al Guardar informacion de contacto: {Correo}", contact.Correo);
+                _logger.LogError(e, "Error al Guardar informacion de contacto: {Correo}", contact.correo);
                 throw;
             }
         }

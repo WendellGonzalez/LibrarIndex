@@ -33,11 +33,11 @@ namespace Application.Services
 
                 var Contact = new Contact
                 {
-                    Nombre = contact.nombre,
-                    Correo = contact.correo,
-                    Fecha = DateTime.UtcNow,
-                    Asunto = contact.asunto,
-                    Comentario = contact.comentario
+                    nombre = contact.nombre,
+                    correo = contact.correo,
+                    fecha = DateTime.UtcNow,
+                    asunto = contact.asunto,
+                    comentario = contact.comentario
                 };
 
                 if (Contact == null)
